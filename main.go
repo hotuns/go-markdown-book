@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
-	"github.com/gaowei-space/markdown-blog/internal/app"
-	"github.com/gaowei-space/markdown-blog/internal/utils"
+	"github.com/hedongshu/go-md-book/internal/app"
+	"github.com/hedongshu/go-md-book/internal/utils"
 	"github.com/urfave/cli/v2"
 	"github.com/urfave/cli/v2/altsrc"
 )

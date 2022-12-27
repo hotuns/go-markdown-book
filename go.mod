@@ -1,4 +1,4 @@
-module github.com/gaowei-space/markdown-blog
+module github.com/hedongshu/go-md-book
 
 go 1.18
 
