@@ -5,16 +5,17 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
 
 	"github.com/fatih/structs"
-	"github.com/gaowei-space/markdown-blog/internal/api"
-	"github.com/gaowei-space/markdown-blog/internal/bindata/assets"
-	"github.com/gaowei-space/markdown-blog/internal/bindata/views"
-	"github.com/gaowei-space/markdown-blog/internal/types"
-	"github.com/gaowei-space/markdown-blog/internal/utils"
+	"github.com/hedongshu/go-md-book/internal/api"
+	"github.com/hedongshu/go-md-book/internal/bindata/assets"
+	"github.com/hedongshu/go-md-book/internal/bindata/views"
+	"github.com/hedongshu/go-md-book/internal/types"
+	"github.com/hedongshu/go-md-book/internal/utils"
 	"github.com/kataras/iris/v12"
 	"github.com/kataras/iris/v12/middleware/accesslog"
 	"github.com/microcosm-cc/bluemonday"
@@ -162,6 +163,11 @@ func getNavs(activeNav string) ([]map[string]interface{}, utils.Node) {
 
 	navs := make([]map[string]interface{}, 0)
 	for _, v := range tree.Children {
+		// v.Children按照CreateAt倒序
+		sort.Slice(v.Children, func(i, j int) bool {
+			return v.Children[i].CreateAt > v.Children[j].CreateAt
+		})
+
 		for _, item := range v.Children {
 			searchActiveNav(item, activeNav)
 			navs = append(navs, structs.Map(item))

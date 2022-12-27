@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"io/ioutil"
 	"log"
 	"os"
 	"path"
@@ -17,6 +16,8 @@ type Node struct {
 	Active   string  `json:"active"`   // 当前活跃的文件
 	Children []*Node `json:"children"` // 目录下的文件或子目录
 	IsDir    bool    `json:"isDir"`    // 是否为目录 true: 是目录 false: 不是目录
+	CreateAt int64   `json:"createAt"` // 创建时间
+	UpdateAt int64   `json:"updateAt"` // 更新时间
 }
 
 // Option 遍历选项
@@ -80,7 +81,7 @@ func explorerRecursive(node *Node, option *Option) {
 	}
 
 	// 目录中的文件和子目录
-	sub, err := ioutil.ReadDir(node.Path)
+	sub, err := os.ReadDir(node.Path)
 	if err != nil {
 		info := "目录不存在，或打开错误。"
 		log.Printf("%v: %v", info, err)
@@ -97,9 +98,17 @@ func explorerRecursive(node *Node, option *Option) {
 		// 访问路径
 		child.Link = strings.TrimPrefix(strings.TrimSuffix(tmp, path.Ext(f.Name())), CurDirPath)
 
+		timeinfo, err := GetSysTime(tmp)
+		if err != nil {
+			log.Println(err)
+		} else {
+			child.CreateAt = timeinfo.CreateAt
+			child.UpdateAt = timeinfo.UpdateAt
+		}
+
 		// 目录或文件名（不包含后缀）
 		child.ShowName = strings.TrimSuffix(f.Name(), path.Ext(f.Name()))
-		if strings.Index(child.ShowName, "@") != -1 {
+		if strings.Contains(child.ShowName, "@") {
 			child.ShowName = child.ShowName[strings.Index(child.ShowName, "@")+1:]
 		}
 		// 是否为目录

@@ -15,7 +15,6 @@ import (
 	"fmt"
 	"net/http"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -186,7 +185,7 @@ func errors404Html() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "errors/404.html", size: 307, mode: os.FileMode(420), modTime: time.Unix(1651999235, 0)}
+	info := bindataFileInfo{name: "errors/404.html", size: 307, mode: os.FileMode(0420), modTime: time.Unix(1651999235, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -206,7 +205,7 @@ func errors500Html() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "errors/500.html", size: 370, mode: os.FileMode(420), modTime: time.Unix(1651999235, 0)}
+	info := bindataFileInfo{name: "errors/500.html", size: 370, mode: os.FileMode(0420), modTime: time.Unix(1651999235, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -226,7 +225,7 @@ func indexHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "index.html", size: 59, mode: os.FileMode(420), modTime: time.Unix(1668859849, 0)}
+	info := bindataFileInfo{name: "index.html", size: 59, mode: os.FileMode(0420), modTime: time.Unix(1668859849, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -246,7 +245,7 @@ func layoutsFooterHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "layouts/footer.html", size: 0, mode: os.FileMode(420), modTime: time.Unix(1667724476, 0)}
+	info := bindataFileInfo{name: "layouts/footer.html", size: 0, mode: os.FileMode(0420), modTime: time.Unix(1667724476, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -266,7 +265,7 @@ func layoutsHeaderHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "layouts/header.html", size: 300, mode: os.FileMode(420), modTime: time.Unix(1667728423, 0)}
+	info := bindataFileInfo{name: "layouts/header.html", size: 300, mode: os.FileMode(0420), modTime: time.Unix(1667728423, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -418,7 +417,7 @@ func RestoreAsset(dir, name string) error {
 	if err != nil {
 		return err
 	}
-	err = ioutil.WriteFile(_filePath(dir, name), data, info.Mode())
+	err = os.WriteFile(_filePath(dir, name), data, info.Mode())
 	if err != nil {
 		return err
 	}
