@@ -24,8 +24,8 @@ const DefaultPort = 5006
 
 func main() {
 	cliApp := cli.NewApp()
-	cliApp.Name = "markdown-blog"
-	cliApp.Usage = "Markdown Blog App"
+	cliApp.Name = "go-md-book"
+	cliApp.Usage = "Markdown Book App"
 	cliApp.Version, _ = utils.FormatAppVersion(AppVersion, GitCommit, BuildDate)
 	cliApp.Commands = getCommands()
 	cliApp.Flags = append(cliApp.Flags, []cli.Flag{}...)

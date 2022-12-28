@@ -12,10 +12,10 @@
 
 ### 命令
 
-- markdown-blog
+- markdown-book
   - -h 查看版本
   - web 运行博客服务
-- markdown-blog web
+- markdown-book web
   - --config FILE 加载配置文件, 默认为空
   - --dir value, -d value 指定 markdown 文件夹，默认：./md/
   - --title value, -t value web 服务标题，默认："Blog"
@@ -48,16 +48,16 @@
 - 二进制文件
 
 ```
-./markdown-blog web --config ./config/config.yml
+./markdown-book web --config ./config/config.yml
 ```
 
 - Docker
 
 ```
-docker run -dit --rm --name=markdown-blog \
+docker run -dit --rm --name=markdown-book \
 -p 5006:5006 \
 -v $(pwd)/md:/md -v $(pwd)/cache:/cache -v $(pwd)/config:/config \
-willgao/markdown-blog:latest --config ./config/config.yml
+willgao/markdown-book:latest --config ./config/config.yml
 ```
 
 ### 默认首页
@@ -103,7 +103,7 @@ gitalk:
 ##### 2. 配置
 
 ```shell
-./markdown-blog web --analyzer-baidu 0952befd5b7da358ad12fae3437515b1
+./markdown-book web --analyzer-baidu 0952befd5b7da358ad12fae3437515b1
 ```
 
 #### 谷歌
@@ -129,7 +129,7 @@ gitalk:
 ##### 2. 配置
 
 ```shell
-./markdown-blog web --analyzer-google G-MYSMYSMYS
+./markdown-book web --analyzer-google G-MYSMYSMYS
 ```
 
 ### 标题栏图标
@@ -185,7 +185,7 @@ server {
 server {
     listen          443 ssl;
     server_name     yourhost.com;
-    access_log      /var/log/nginx/markdown-blog.access.log main;
+    access_log      /var/log/nginx/markdown-book.access.log main;
 
 
     #证书文件名称
@@ -210,7 +210,7 @@ server {
 
 1. 下载最新版 [release](https://github.com/hedongshu/go-md-book/releases/)
 
-2. 停止程序，解压替换 `markdown-blog`
+2. 停止程序，解压替换 `markdown-book`
 
 3. 重新启动程序
 
@@ -222,7 +222,7 @@ server {
 
 3. 启动 web 服务
 
-   运行之后访问地址 [http://localhost:5006](http://localhost:5006)，API 请求会转发给 `markdown-blog` 程序
+   运行之后访问地址 [http://localhost:5006](http://localhost:5006)，API 请求会转发给 `markdown-book` 程序
 
    ```
    make run
@@ -230,7 +230,7 @@ server {
 
 4. 编译
 
-   在 **bin** 目录生成当前系统的压缩包，如：markdown-blog-v1.1.0-darwin-amd64.tar
+   在 **bin** 目录生成当前系统的压缩包，如：markdown-book-v1.1.0-darwin-amd64.tar
 
    ```
    make
@@ -238,7 +238,7 @@ server {
 
 5. 打包
 
-   在 **package** 目录生成当前系统的压缩包，如：markdown-blog-v1.1.0-darwin-amd64.tar
+   在 **package** 目录生成当前系统的压缩包，如：markdown-book-v1.1.0-darwin-amd64.tar
 
    ```
    make package
@@ -246,7 +246,7 @@ server {
 
 6. 生成 Windows、Linux、Mac 的压缩包
 
-   在 **package** 生成压缩包，如：markdown-blog-v1.1.0-darwin-amd64.tar markdown-blog-v1.1.0-linux-amd64.tar.gz markdown-blog-v1.1.0-windows-amd64.zip
+   在 **package** 生成压缩包，如：markdown-book-v1.1.0-darwin-amd64.tar markdown-book-v1.1.0-linux-amd64.tar.gz markdown-book-v1.1.0-windows-amd64.zip
 
    ```
    make package-all
@@ -257,7 +257,7 @@ server {
 7. 下载
 
 ```
-docker pull willgao/markdown-blog:latest
+docker pull willgao/markdown-book:latest
 ```
 
 2. 启动
@@ -265,19 +265,19 @@ docker pull willgao/markdown-blog:latest
    - 线上环境
 
    ```
-   docker run -dit --rm --name=markdown-blog \
+   docker run -dit --rm --name=markdown-book \
    -p 5006:5006 \
    -v $(pwd)/md:/md -v $(pwd)/cache:/cache \
-   willgao/markdown-blog:latest
+   willgao/markdown-book:latest
    ```
 
    - 开发环境
 
    ```
-   docker run -dit --rm --name=markdown-blog \
+   docker run -dit --rm --name=markdown-book \
    -p 5006:5006 \
    -v $(pwd)/md:/md -v $(pwd)/cache:/cache \
-   willgao/markdown-blog:latest \
+   willgao/markdown-book:latest \
    -e dev
    ```
 
@@ -287,25 +287,25 @@ docker pull willgao/markdown-blog:latest
 
 ```
 # 查看帮助
-docker run -dit --rm --name=markdown-blog \
+docker run -dit --rm --name=markdown-book \
     -p 5006:5006 \
     -v $(pwd)/md:/md -v $(pwd)/cache:/cache \
-    willgao/markdown-blog:latest -h
+    willgao/markdown-book:latest -h
 
 
 # 设置 title
-docker run -dit --rm --name=markdown-blog \
+docker run -dit --rm --name=markdown-book \
     -p 5006:5006 \
     -v $(pwd)/md:/md -v $(pwd)/cache:/cache \
-    willgao/markdown-blog:latest \
+    willgao/markdown-book:latest \
     -t "TechMan'Blog"
 
 
 # 设置 谷歌统计
-docker run -dit --rm --name=markdown-blog \
+docker run -dit --rm --name=markdown-book \
     -p 5006:5006 \
     -v $(pwd)/md:/md -v $(pwd)/cache:/cache \
-    willgao/markdown-blog:latest \
+    willgao/markdown-book:latest \
     -t "TechMan'Blog" \
     --analyzer-google "De44AJSLDdda"
 ```

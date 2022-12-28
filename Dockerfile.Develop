@@ -2,8 +2,8 @@ FROM scratch as runner
 
 MAINTAINER willgao <will-gao@hotmail.com>
 
-COPY ./build/markdown-blog-linux-amd64/markdown-blog /data/app/
+COPY ./build/markdown-book-linux-amd64/markdown-book /data/app/
 
 EXPOSE 5006
 
-ENTRYPOINT ["/data/app/markdown-blog", "web"]
+ENTRYPOINT ["/data/app/markdown-book", "web"]

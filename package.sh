@@ -176,8 +176,8 @@ run() {
     package_binary
 }
 
-package_markdownblog() {
-    BINARY_NAME='markdown-blog'
+package_mdbook() {
+    BINARY_NAME='go-md-book'
     MAIN_FILE="./main.go"
 
     run
@@ -200,5 +200,5 @@ do
     esac
 done
 
-package_markdownblog
+package_mdbook
 

@@ -1,31 +1,31 @@
 GO111MODULE=on
 
 .PHONY: build
-build: bindata markdown-blog
+build: bindata markdown-book
 
 .PHONY: docker-push
 docker-push: package-all
-	docker buildx build --platform linux/arm64,linux/amd64 -t willgao/markdown-blog:latest . --push
+	docker buildx build --platform linux/arm64,linux/amd64 -t willgao/markdown-book:latest . --push
 
 .PHONY: docker-build
 docker-build: package-all
-	docker build -t willgao/markdown-blog:dev -f ./Dockerfile.Develop .
+	docker build -t willgao/markdown-book:dev -f ./Dockerfile.Develop .
 
 .PHONY: bindata
 bindata:
 	go install github.com/go-bindata/go-bindata/v3/go-bindata@latest
 	go generate ./...
 
-.PHONY: markdown-blog
-markdown-blog:
-	go build $(RACE) -o bin/markdown-blog ./
+.PHONY: markdown-book
+markdown-book:
+	go build $(RACE) -o bin/markdown-book ./
 
 .PHONY: build-race
 build-race: enable-race build
 
 .PHONY: run
 run: build
-	./bin/markdown-blog web --config ./config/config.yml
+	./bin/markdown-book web --config ./config/config.yml
 
 .PHONY: run-race
 run-race: enable-race run
@@ -51,4 +51,4 @@ package-all: build
 
 .PHONY: clean
 clean:
-	rm bin/markdown-bolg
+	rm ./bin/markdown-book
