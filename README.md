@@ -8,6 +8,38 @@
 
 ## 安装
 
+1. 下载 [release](https://github.com/hedongshu/go-md-book/releases)
+
+2. 解压
+
+```
+tar zxf markdown-book-V1.0.0-darwin-amd64.tar.gz
+```
+
+3. 创建 markdown-book 文件目录
+
+```
+cd markdown-book-linux-amd64
+mkdir md
+echo "### Hello World" > ./md/主页.md
+```
+
+4. 运行
+
+```
+./markdown-book web
+```
+
+5. 访问 http://127.0.0.1:5006，查看效果
+
+## 升级
+
+1. 下载最新版 [release](https://github.com/hedongshu/go-md-book/releases)
+
+2. 停止程序，解压替换 `markdown-book`
+
+3. 重新启动程序
+
 ## 使用
 
 ### 命令
@@ -148,7 +180,7 @@ gitalk:
 
 <img width="407" alt="image" src="https://user-images.githubusercontent.com/10205742/176992913-148a5ba5-bce0-42ed-b09a-9f914556723a.png">
 
-### 部署
+## 部署
 
 > Nginx 反向代理配置文件参考
 
@@ -205,14 +237,6 @@ server {
      }
  }
 ```
-
-## 升级
-
-1. 下载最新版 [release](https://github.com/hedongshu/go-md-book/releases/)
-
-2. 停止程序，解压替换 `markdown-book`
-
-3. 重新启动程序
 
 ## 开发
 
