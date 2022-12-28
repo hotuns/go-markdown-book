@@ -24,7 +24,7 @@ const DefaultPort = 5006
 
 func main() {
 	cliApp := cli.NewApp()
-	cliApp.Name = "go-md-book"
+	cliApp.Name = "markdown-book"
 	cliApp.Usage = "Markdown Book App"
 	cliApp.Version, _ = utils.FormatAppVersion(AppVersion, GitCommit, BuildDate)
 	cliApp.Commands = getCommands()
