@@ -125,13 +125,10 @@ build() {
     for OS in "${INPUT_OS[@]}";do
         for ARCH in "${INPUT_ARCH[@]}";do
             if [[ "${OS}" = "windows"  ]];then
-                echo "windows"
                 FILENAME=${BINARY_NAME}.exe
             else
-                echo "linux"
                 FILENAME=${BINARY_NAME}
             fi
-            echo CGO_ENABLED=0 GOOS=${OS} GOARCH=${ARCH} go build -ldflags "${LDFLAGS}" -trimpath -o ${BUILD_DIR}/${BINARY_NAME}-${OS}-${ARCH}/${FILENAME} ${MAIN_FILE}
             env CGO_ENABLED=0 GOOS=${OS} GOARCH=${ARCH} go build -ldflags "${LDFLAGS}" -trimpath -o ${BUILD_DIR}/${BINARY_NAME}-${OS}-${ARCH}/${FILENAME} ${MAIN_FILE}
         done
     done
