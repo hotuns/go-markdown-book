@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash -x
 
 # 生成压缩包 xx.tar.gz或xx.zip
 # 使用 . ./package.sh -a amd664 -p linux -v v2.0.0
@@ -125,10 +125,13 @@ build() {
     for OS in "${INPUT_OS[@]}";do
         for ARCH in "${INPUT_ARCH[@]}";do
             if [[ "${OS}" = "windows"  ]];then
+                echo "windows"
                 FILENAME=${BINARY_NAME}.exe
             else
+                echo "linux"
                 FILENAME=${BINARY_NAME}
             fi
+            echo CGO_ENABLED=0 GOOS=${OS} GOARCH=${ARCH} go build -ldflags "${LDFLAGS}" -trimpath -o ${BUILD_DIR}/${BINARY_NAME}-${OS}-${ARCH}/${FILENAME} ${MAIN_FILE}
             env CGO_ENABLED=0 GOOS=${OS} GOARCH=${ARCH} go build -ldflags "${LDFLAGS}" -trimpath -o ${BUILD_DIR}/${BINARY_NAME}-${OS}-${ARCH}/${FILENAME} ${MAIN_FILE}
         done
     done
@@ -171,8 +174,11 @@ clean() {
 
 # 运行
 run() {
+    echo "开始初始化"
     init
+    echo "开始编译"
     build
+    echo "开始打包"
     package_binary
 }
 

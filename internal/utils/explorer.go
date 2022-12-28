@@ -16,8 +16,7 @@ type Node struct {
 	Active   string  `json:"active"`   // 当前活跃的文件
 	Children []*Node `json:"children"` // 目录下的文件或子目录
 	IsDir    bool    `json:"isDir"`    // 是否为目录 true: 是目录 false: 不是目录
-	CreateAt int64   `json:"createAt"` // 创建时间
-	UpdateAt int64   `json:"updateAt"` // 更新时间
+	ModTime  int64   `json:"modTime"`  // 更新时间
 }
 
 // Option 遍历选项
@@ -98,12 +97,11 @@ func explorerRecursive(node *Node, option *Option) {
 		// 访问路径
 		child.Link = strings.TrimPrefix(strings.TrimSuffix(tmp, path.Ext(f.Name())), CurDirPath)
 
-		timeinfo, err := GetSysTime(tmp)
+		finfo, err := f.Info()
 		if err != nil {
 			log.Println(err)
 		} else {
-			child.CreateAt = timeinfo.CreateAt
-			child.UpdateAt = timeinfo.UpdateAt
+			child.ModTime = finfo.ModTime().Unix()
 		}
 
 		// 目录或文件名（不包含后缀）
@@ -125,6 +123,7 @@ func explorerRecursive(node *Node, option *Option) {
 				}
 			}
 		} else { // 文件
+
 			// 非忽略文件，添加到结果中
 			if !IsInSlice(option.IgnoreFile, f.Name()) {
 				node.Children = append(node.Children, &child)

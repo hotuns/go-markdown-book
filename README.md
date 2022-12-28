@@ -191,7 +191,7 @@ server {
     #证书文件名称
     ssl_certificate /etc/nginx/certs/yourhost.com_bundle.crt;
     #私钥文件名称
-    ssl_certificate_key /etc/nginx/certs/yourhost.com.key;
+    ssl_certificate_key /etc/ngpackinx/certs/yourhost.com.key;
     ssl_session_timeout 5m;
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;

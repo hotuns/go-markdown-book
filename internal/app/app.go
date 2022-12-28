@@ -163,9 +163,9 @@ func getNavs(activeNav string) ([]map[string]interface{}, utils.Node) {
 
 	navs := make([]map[string]interface{}, 0)
 	for _, v := range tree.Children {
-		// v.Children按照CreateAt倒序
+		// v.Children按照ModTime倒序
 		sort.Slice(v.Children, func(i, j int) bool {
-			return v.Children[i].CreateAt > v.Children[j].CreateAt
+			return v.Children[i].ModTime > v.Children[j].ModTime
 		})
 
 		for _, item := range v.Children {
