@@ -5,7 +5,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -61,11 +60,10 @@ func RunWeb(ctx *cli.Context) error {
 	app.Use(func(ctx iris.Context) {
 		activeNav := getActiveNav(ctx)
 
-		navs, firstNav := getNavs(activeNav)
+		Categories, Articles, Tree_articles := getPosts(activeNav)
 
-		firstLink := strings.TrimPrefix(firstNav.Link, "/")
-		if setIndexAuto && Index != firstLink {
-			Index = firstLink
+		if setIndexAuto {
+			Index = "/"
 		}
 
 		// 设置 Gitalk ID
@@ -74,8 +72,10 @@ func RunWeb(ctx *cli.Context) error {
 		ctx.ViewData("Gitalk", Gitalk)
 		ctx.ViewData("Analyzer", Analyzer)
 		ctx.ViewData("Title", Title)
-		ctx.ViewData("Nav", navs)
+		ctx.ViewData("Articles", Articles)
+		ctx.ViewData("TreeArticles", Tree_articles)
 		ctx.ViewData("ActiveNav", activeNav)
+		ctx.ViewData("Categories", Categories)
 		ctx.ViewLayout(LayoutFile)
 
 		ctx.Next()
@@ -83,7 +83,9 @@ func RunWeb(ctx *cli.Context) error {
 
 	app.Favicon("./favicon.ico")
 	app.HandleDir("/static", assets.AssetFile())
-	app.Get("/{f:path}", iris.Cache(Cache), articleHandler)
+
+	app.Get("/", iris.Cache(Cache), homeHandler)
+	app.Get("/article/{f:path}", iris.Cache(Cache), articleHandler)
 
 	app.Run(iris.Addr(":" + strconv.Itoa(parsePort(ctx))))
 
@@ -153,7 +155,7 @@ func parsePort(ctx *cli.Context) int {
 	return port
 }
 
-func getNavs(activeNav string) ([]map[string]interface{}, utils.Node) {
+func getPosts(activeNav string) ([]string, []utils.Node, []map[string]interface{}) {
 	var option utils.Option
 	option.RootPath = []string{MdDir}
 	option.SubFlag = true
@@ -161,41 +163,42 @@ func getNavs(activeNav string) ([]map[string]interface{}, utils.Node) {
 	option.IgnoreFile = IgnoreFile
 	tree, _ := utils.Explorer(option)
 
-	navs := make([]map[string]interface{}, 0)
+	Tree_articles := make([]map[string]interface{}, 0)
+	Categories := make([]string, 0)
+	Articles := make([]utils.Node, 0)
+
 	for _, v := range tree.Children {
-		// v.Children按照ModTime倒序
-		sort.Slice(v.Children, func(i, j int) bool {
-			return v.Children[i].ModTime > v.Children[j].ModTime
-		})
+		// // v.Children按照ModTime倒序
+		// sort.Slice(v.Children, func(i, j int) bool {
+		// 	return v.Children[i].ModTime > v.Children[j].ModTime
+		// })
 
 		for _, item := range v.Children {
-			searchActiveNav(item, activeNav)
-			navs = append(navs, structs.Map(item))
+			if item.IsDir {
+				Categories = append(Categories, item.Name)
+			}
+
+			appendArticles(item, &Articles, activeNav)
+			Tree_articles = append(Tree_articles, structs.Map(item))
 		}
 	}
 
-	firstNav := getFirstNav(*tree.Children[0])
-
-	return navs, firstNav
+	return Categories, Articles, Tree_articles
 }
 
-func searchActiveNav(node *utils.Node, activeNav string) {
-	if !node.IsDir && node.Link == "/"+activeNav {
-		node.Active = "active"
-		return
+func appendArticles(node *utils.Node, Articles *[]utils.Node, activeNav string) {
+	if !node.IsDir {
+		*Articles = append(*Articles, *node)
+		if node.Link == "/"+activeNav {
+			node.Active = "active"
+		}
 	}
+
 	if len(node.Children) > 0 {
 		for _, v := range node.Children {
-			searchActiveNav(v, activeNav)
+			appendArticles(v, Articles, activeNav)
 		}
 	}
-}
-
-func getFirstNav(node utils.Node) utils.Node {
-	if !node.IsDir {
-		return node
-	}
-	return getFirstNav(*node.Children[0])
 }
 
 func getActiveNav(ctx iris.Context) string {
@@ -204,6 +207,20 @@ func getActiveNav(ctx iris.Context) string {
 		f = Index
 	}
 	return f
+}
+
+func homeHandler(ctx iris.Context) {
+	activeNav := getActiveNav(ctx)
+
+	List := make([]map[string]interface{}, 0)
+	_, Articles, _ := getPosts(activeNav)
+	for _, v := range Articles {
+		info := utils.GetArticleInfo(v)
+		List = append(List, structs.Map(info))
+	}
+
+	ctx.ViewData("List", List)
+	ctx.View("home.html")
 }
 
 func articleHandler(ctx iris.Context) {
@@ -231,7 +248,7 @@ func articleHandler(ctx iris.Context) {
 
 	ctx.ViewData("Article", mdToHtml(bytes))
 
-	ctx.View("index.html")
+	ctx.View("article.html")
 }
 
 func mdToHtml(content []byte) template.HTML {

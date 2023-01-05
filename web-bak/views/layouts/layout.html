@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,11 +23,11 @@
 	<!-- Baidu analytics -->
 	<script>
 		var _hmt = _hmt || [];
-		(function() {
-		  var hm = document.createElement("script");
-		  hm.src = "https://hm.baidu.com/hm.js?{{.Analyzer.Baidu}}";
-		  var s = document.getElementsByTagName("script")[0];
-		  s.parentNode.insertBefore(hm, s);
+		(function () {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?{{.Analyzer.Baidu}}";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
 		})();
 	</script>
 	{{end}}
@@ -36,7 +37,7 @@
 	<script async src="https://www.googletagmanager.com/gtag/js?id={{.Analyzer.Google}}"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
+		function gtag() { dataLayer.push(arguments); }
 		gtag('js', new Date());
 
 		gtag('config', '{{.Analyzer.Google}}');
@@ -44,6 +45,7 @@
 	{{end}}
 
 </head>
+
 <body>
 	<div class="book font-size-2 font-family-1 color-theme-2">
 		<div class="book-summary">

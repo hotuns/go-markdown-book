@@ -1,10 +1,17 @@
 package utils
 
 import (
+	"bytes"
 	"log"
 	"os"
 	"path"
+	"regexp"
 	"strings"
+	"time"
+
+	"github.com/PuerkitoBio/goquery"
+	"github.com/microcosm-cc/bluemonday"
+	"github.com/russross/blackfriday/v2"
 )
 
 // Node 树节点
@@ -130,4 +137,51 @@ func explorerRecursive(node *Node, option *Option) {
 			}
 		}
 	}
+}
+
+// Article 文章
+type Article struct {
+	// 文章标题
+	Title string `json:"title"`
+	// 分类
+	Category string `json:"category"`
+	// 发布时间
+	PublishTime string `json:"publishTime"`
+	// 文章预览， 截取文章前100个字符
+	Preview string `json:"preview"`
+	// 链接
+	Link string `json:"link"`
+}
+
+func GetArticleInfo(node Node) Article {
+
+	var article Article = Article{
+		Title: node.ShowName,
+		Link:  node.Link,
+	}
+	article.PublishTime = time.Unix(node.ModTime, 0).Format("2006-01-02 15:04:05")
+
+	reg := regexp.MustCompile(`/(.+)/`)
+	article.Category = reg.FindStringSubmatch(node.Link)[1]
+	// 读取文件
+	content, err := os.ReadFile(node.Path)
+	if err != nil {
+		log.Println(err)
+	}
+	unsafe := blackfriday.Run(content)
+	html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
+	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(html))
+	if err != nil {
+		log.Println(err)
+	}
+	plist := doc.Find("p").Text()
+	if strings.Contains(plist, "[toc]") {
+		plist = strings.ReplaceAll(plist, "[toc]", "")
+	}
+	if len(plist) > 100 {
+		plist = plist[:100]
+	}
+	article.Preview = plist
+
+	return article
 }

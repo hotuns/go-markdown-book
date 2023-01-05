@@ -345,7 +345,7 @@ body {
 .side-container {
   height: 100vh;
   position: fixed;
-  right: 0;
+  right: -100px;
   font-style: normal;
   font-size: 1em;
   margin: 0;
@@ -549,8 +549,14 @@ footer * {
 }
 
 .post-container {
-  margin: 0 0 20px 0;
+  margin: 0 0 30px 0;
   font-weight: normal;
+}
+.post-container .gist-file {
+  border: none !important;
+}
+.post-container .gist-file .gist-data {
+  background-color: rgba(0, 0, 0, 0) !important;
 }
 
 .post-title {
@@ -600,6 +606,15 @@ figure .code pre {
   border-top-left-radius: 0;
   border-left: solid rgba(0, 0, 0, 0.05) 1px;
   margin-right: 1px;
+}
+
+.h4,
+.h5,
+.h6,
+h4,
+h5,
+h6 {
+  margin-top: 20px;
 }
 
 @media (max-width: 768px) {
@@ -697,7 +712,7 @@ figure .code pre {
     margin: 3px 0;
   }
   .post-meta {
-    font-size: 14px;
+    font-size: 12px;
     margin: 10px 0;
   }
   .post-abstract {
@@ -834,7 +849,7 @@ figure .code pre {
     margin: 3px 0;
   }
   .post-meta {
-    font-size: 14px;
+    font-size: 12px;
     margin: 10px 0;
   }
   .post-abstract {
