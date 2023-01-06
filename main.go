@@ -14,7 +14,8 @@ import (
 
 var (
 	MdDir                = "md/"
-	Title                = "Blog"
+	Title                = "Blog Title"
+	Title2               = "Blog Title2"
 	AppVersion           = "1.0.0"
 	BuildDate, GitCommit string
 )
@@ -56,6 +57,12 @@ func webCommand() *cli.Command {
 			Aliases: []string{"t"},
 			Value:   Title,
 			Usage:   "Blog title",
+		}),
+		altsrc.NewStringFlag(&cli.StringFlag{
+			Name:    "title2",
+			Aliases: []string{"t2"},
+			Value:   Title2,
+			Usage:   "Blog title2",
 		}),
 		altsrc.NewIntFlag(&cli.IntFlag{
 			Name:    "port",

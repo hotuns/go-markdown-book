@@ -1,8 +1,6 @@
-(function () {
-  hljs.highlightAll();
-
+$(document).ready(function () {
+  // theme切换
   var KEY_THEME_STATE = "blog_theme_state";
-  var $book = $(".book");
   var $themeAction = $(".js-theme-action");
   var $themeCss = document.getElementById("theme-css");
 
@@ -42,14 +40,12 @@
   function setThemeState(color) {
     if (color == "dark") {
       $(document.documentElement).addClass("dark");
-      $book.addClass("color-theme-2");
       $themeAction.html('<i class="fa fa-sun-o"></i>');
-      $themeCss.href = "/static/css/github-markdown-css/dark.css";
+      $themeCss.href = "/static/css/style-dark.css";
     } else {
       $(document.documentElement).removeClass("dark");
-      $book.removeClass("color-theme-2");
       $themeAction.html('<i class="fa fa-moon-o"></i>');
-      $themeCss.href = "/static/css/github-markdown-css/white.css";
+      $themeCss.href = "/static/css/style.css";
     }
   }
-})();
+});

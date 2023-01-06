@@ -15,12 +15,16 @@
   <meta content="black" name="apple-mobile-web-app-status-bar-style">
   <meta content="telephone=no" name="format-detection">
   <meta name="renderer" content="webkit">
-  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/static/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/static/css/style.css">
   <link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml">
   <meta name="generator" content="Hexo 6.3.0">
-  <link rel="stylesheet" href="/static/css/prism-material-dark.css" type="text/css">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/static/css/prism.css">
+  <!-- <link rel="stylesheet" href="/static/css/style-dark.css"> -->
+  <link id="theme-css" rel="stylesheet" href="/static/css/style.css">
+
 
 
   {{ if .Gitalk.ClientID }}
@@ -56,33 +60,38 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" id="stage">
     <div class="row">
       <div class="col-sm-3 col-xs-12 side-container fadeInRight" id="side-bar">
         <div class="vertical-text site-title">
-          <h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/">{{ .Title }}</a></h3>
-          <h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/">标题标题</a></h1>
-          <!--h6(onclick="triggerSiteNav()") Trigger-->
+          <h3 class="site-title-small" tabindex="-1"><a class="a-title" href="/">{{ .Title2 }}</a></h3>
+          <h1 class="site-title-large" tabindex="-1"><a class="a-title" href="/">{{ .Title }}</a></h1>
+
         </div><br class="visible-lg visible-md visible-sm">
         <div class="site-title-links" id="site-nav">
           <ul>
-
-            <li><a class="current" href="/">首页</a></li>
-            {{ range .Categories }}
+            <li>
+              <div class="header" id="header" role="navigation">
+                <a class="  js-theme-action theme-action" href="javascript:;"><i class="fa fa-sun-o"></i></a>
+              </div>
+            </li>
+            <li><a href="/">首页</a></li>
+            <li><a href="/categories">分类</a></li>
+            <!-- {{ range .Categories }}
             <li><a href="">{{ . }}</a></li>
-            {{end}}
-            <li class="soc"><a href="https://github.com/moeyua" target="_blank" rel="noopener noreferrer"
+            {{end}} -->
+
+            <!-- <li class="soc"><a href="https://github.com/moeyua" target="_blank" rel="noopener noreferrer"
                 aria-label="Github"><i class="fa fa-github"> </i></a><a href="https://twitter.com/EvodMoeyua"
                 target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fa fa-twitter"> </i></a><a
                 href="http://moeyua.com/atom.xml" target="_blank" rel="noopener noreferrer" aria-label="RSS"><i
-                  class="fa fa-rss"> </i></a></li>
+                  class="fa fa-rss"> </i></a></li> -->
           </ul>
           <div class="visible-lg visible-md visible-sm site-nav-footer"><br class="site-nav-footer-br">
             <footer>
-              <p>© 2023 <a target="_blank" href="http://moeyua.com" rel="noopener noreferrer">Moeyua</a></p>
-              <p>Theme <a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography"
-                  rel="noopener noreferrer">Typography</a> by <a target="_blank" href="https://www.keep.moe"
-                  rel="noopener noreferrer">Makito</a></p>
+              <p>© 2023 <a target="_blank" href="" rel=""></a></p>
+              <p> <a target="_blank" href="https://github.com/hedongshu/go-markdown-book" rel="">Design</a>
+                by <a target="_blank" href="https://github.com/hedongshu" rel="">HDS</a></p>
             </footer>
           </div>
         </div>
@@ -97,9 +106,6 @@
 
             <!-- Render the current template here -->
             {{ yield }}
-
-
-
 
             <!-- <div class="pagination no-margin-bottom">
               <p class="clearfix"></p>
@@ -117,8 +123,6 @@
             <p>Theme <a target="_blank" href="https://github.com/SumiMakito/hexo-theme-typography"
                 rel="noopener noreferrer">Typography</a> by <a target="_blank" href="https://www.keep.moe"
                 rel="noopener noreferrer">Makito</a></p>
-            <p>Proudly published with <a target="_blank" href="https://hexo.io" rel="noopener noreferrer">Hexo</a>
-            </p>
           </footer>
         </div>
       </div>
@@ -129,7 +133,29 @@
   <script src="/static/js/bootstrap.min.js"></script>
   <script src="/static/js/jquery-migrate-1.2.1.min.js"></script>
   <script src="/static/js/jquery.appear.js"></script>
+  <script src="/static/js/prism.js"></script>
   <script src="/static/js/typography.js"></script>
+  <script src="/static/js/main.js"></script>
+
+
+  {{ if .Gitalk.ClientID }}
+  <script src="/static/js/gitalk.min.js"></script>
+  <script>
+    const gitalk = new Gitalk({
+      clientID: '{{.Gitalk.ClientID}}',
+      clientSecret: '{{.Gitalk.ClientSecret}}',
+      repo: '{{.Gitalk.Repo}}',
+      owner: '{{.Gitalk.Owner}}',
+      admin: ['{{.Gitalk.Owner}}'],
+      id: '{{.Gitalk.Id}}',
+      labels: ['gitalk']
+    })
+
+    gitalk.render('gitalk')
+  </script>
+  {{end}}
+
+
 </body>
 
 </html>

@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -26,6 +27,7 @@ var (
 	MdDir      string
 	Env        string
 	Title      string
+	Title2     string
 	Index      string
 	LayoutFile = "layouts/layout.html"
 	LogsDir    = "cache/logs/"
@@ -48,7 +50,11 @@ func RunWeb(ctx *cli.Context) error {
 	setLog(app)
 
 	tmpl := iris.HTML(views.AssetFile(), ".html").Reload(true)
+
 	app.RegisterView(tmpl)
+	tmpl.AddFunc("getChildrenCount", func(node utils.Node) int {
+		return len(node.Children)
+	})
 	app.OnErrorCode(iris.StatusNotFound, api.NotFound)
 	app.OnErrorCode(iris.StatusInternalServerError, api.InternalServerError)
 
@@ -72,6 +78,7 @@ func RunWeb(ctx *cli.Context) error {
 		ctx.ViewData("Gitalk", Gitalk)
 		ctx.ViewData("Analyzer", Analyzer)
 		ctx.ViewData("Title", Title)
+		ctx.ViewData("Title2", Title2)
 		ctx.ViewData("Articles", Articles)
 		ctx.ViewData("TreeArticles", Tree_articles)
 		ctx.ViewData("ActiveNav", activeNav)
@@ -86,6 +93,8 @@ func RunWeb(ctx *cli.Context) error {
 
 	app.Get("/", iris.Cache(Cache), homeHandler)
 	app.Get("/article/{f:path}", iris.Cache(Cache), articleHandler)
+	app.Get("/categories", iris.Cache(Cache), categoriesHandler)
+	app.Get("/categories/{f:path}", iris.Cache(Cache), categoriesHandler)
 
 	app.Run(iris.Addr(":" + strconv.Itoa(parsePort(ctx))))
 
@@ -101,6 +110,7 @@ func initParams(ctx *cli.Context) {
 
 	Env = ctx.String("env")
 	Title = ctx.String("title")
+	Title2 = ctx.String("title2")
 	Index = ctx.String("index")
 
 	Cache = time.Minute * 0
@@ -155,7 +165,7 @@ func parsePort(ctx *cli.Context) int {
 	return port
 }
 
-func getPosts(activeNav string) ([]string, []utils.Node, []map[string]interface{}) {
+func getPosts(activeNav string) ([]string, []utils.Node, []utils.Node) {
 	var option utils.Option
 	option.RootPath = []string{MdDir}
 	option.SubFlag = true
@@ -163,7 +173,7 @@ func getPosts(activeNav string) ([]string, []utils.Node, []map[string]interface{
 	option.IgnoreFile = IgnoreFile
 	tree, _ := utils.Explorer(option)
 
-	Tree_articles := make([]map[string]interface{}, 0)
+	Tree_articles := make([]utils.Node, 0)
 	Categories := make([]string, 0)
 	Articles := make([]utils.Node, 0)
 
@@ -179,7 +189,7 @@ func getPosts(activeNav string) ([]string, []utils.Node, []map[string]interface{
 			}
 
 			appendArticles(item, &Articles, activeNav)
-			Tree_articles = append(Tree_articles, structs.Map(item))
+			Tree_articles = append(Tree_articles, *item)
 		}
 	}
 
@@ -220,7 +230,36 @@ func homeHandler(ctx iris.Context) {
 	}
 
 	ctx.ViewData("List", List)
-	ctx.View("home.html")
+	if err := ctx.View("home.html"); err != nil {
+		log.Println(err)
+	}
+}
+
+func categoriesHandler(ctx iris.Context) {
+	categorie := ctx.Params().Get("f")
+	showAll := false
+	List := make([]utils.Article, 0)
+
+	if categorie == "" {
+		showAll = true
+	} else {
+		_, _, TreeArticles := getPosts(categorie)
+		for _, v := range TreeArticles {
+			if v.Name == categorie {
+				for _, item := range v.Children {
+					info := utils.GetArticleInfo(*item)
+					List = append(List, info)
+				}
+				break
+			}
+		}
+	}
+
+	ctx.ViewData("ShowAll", showAll)
+	ctx.ViewData("Categorie", categorie)
+	ctx.ViewData("List", List)
+
+	ctx.View("categories.html")
 }
 
 func articleHandler(ctx iris.Context) {
@@ -266,7 +305,7 @@ func mdToHtml(content []byte) template.HTML {
 	})
 
 	unsafe := blackfriday.Run([]byte(strs), blackfriday.WithRenderer(renderer), blackfriday.WithExtensions(blackfriday.CommonExtensions))
-	html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
+	html := bluemonday.UGCPolicy().AllowAttrs("class").Matching(regexp.MustCompile("^language-[a-zA-Z0-9]+$")).OnElements("code").SanitizeBytes(unsafe)
 
 	return template.HTML(string(html))
 }

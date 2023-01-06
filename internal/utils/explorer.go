@@ -178,10 +178,11 @@ func GetArticleInfo(node Node) Article {
 	if strings.Contains(plist, "[toc]") {
 		plist = strings.ReplaceAll(plist, "[toc]", "")
 	}
-	if len(plist) > 100 {
-		plist = plist[:100]
+	if len(plist) > 150 {
+		runeList := []rune(plist)
+		plist = string(runeList[:150])
 	}
-	article.Preview = plist
+	article.Preview = plist + "..."
 
 	return article
 }
