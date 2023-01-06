@@ -209,7 +209,7 @@ func cssAnimationCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "css/animation.css", size: 4634, mode: os.FileMode(420), modTime: time.Unix(1672822754, 0)}
+	info := bindataFileInfo{name: "css/animation.css", size: 4634, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -229,7 +229,7 @@ func cssAnimationCssMap() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "css/animation.css.map", size: 1023, mode: os.FileMode(420), modTime: time.Unix(1672907804, 0)}
+	info := bindataFileInfo{name: "css/animation.css.map", size: 1023, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -249,7 +249,7 @@ func cssBlog_basicCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "css/blog_basic.css", size: 41089, mode: os.FileMode(436), modTime: time.Unix(1672822797, 0)}
+	info := bindataFileInfo{name: "css/blog_basic.css", size: 41089, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -269,7 +269,7 @@ func cssBootstrapMinCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "css/bootstrap.min.css", size: 330607, mode: os.FileMode(436), modTime: time.Unix(1672822797, 0)}
+	info := bindataFileInfo{name: "css/bootstrap.min.css", size: 330607, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -289,7 +289,7 @@ func cssFontAwesomeMinCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "css/font-awesome.min.css", size: 91481, mode: os.FileMode(436), modTime: time.Unix(1672822797, 0)}
+	info := bindataFileInfo{name: "css/font-awesome.min.css", size: 91481, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -329,7 +329,7 @@ func cssJquerySimplyscrollCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "css/jquery.simplyscroll.css", size: 3228, mode: os.FileMode(436), modTime: time.Unix(1672822797, 0)}
+	info := bindataFileInfo{name: "css/jquery.simplyscroll.css", size: 3228, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -349,7 +349,7 @@ func cssPrismCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "css/prism.css", size: 3500, mode: os.FileMode(420), modTime: time.Unix(1672969300, 0)}
+	info := bindataFileInfo{name: "css/prism.css", size: 3500, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -369,7 +369,7 @@ func cssStyleDarkCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "css/style-dark.css", size: 14868, mode: os.FileMode(420), modTime: time.Unix(1672822754, 0)}
+	info := bindataFileInfo{name: "css/style-dark.css", size: 14868, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -389,7 +389,7 @@ func cssStyleDarkCssMap() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "css/style-dark.css.map", size: 3523, mode: os.FileMode(420), modTime: time.Unix(1672907804, 0)}
+	info := bindataFileInfo{name: "css/style-dark.css.map", size: 3523, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -409,7 +409,7 @@ func cssStyleCss() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "css/style.css", size: 14861, mode: os.FileMode(420), modTime: time.Unix(1672822754, 0)}
+	info := bindataFileInfo{name: "css/style.css", size: 14861, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -429,7 +429,7 @@ func cssStyleCssMap() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "css/style.css.map", size: 3492, mode: os.FileMode(420), modTime: time.Unix(1672907804, 0)}
+	info := bindataFileInfo{name: "css/style.css.map", size: 3492, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -449,7 +449,7 @@ func fontsFontawesomeWebfontEot() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "fonts/fontawesome-webfont.eot", size: 56006, mode: os.FileMode(436), modTime: time.Unix(1672831921, 0)}
+	info := bindataFileInfo{name: "fonts/fontawesome-webfont.eot", size: 56006, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -469,7 +469,7 @@ func fontsFontawesomeWebfontSvg() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "fonts/fontawesome-webfont.svg", size: 287007, mode: os.FileMode(436), modTime: time.Unix(1672831921, 0)}
+	info := bindataFileInfo{name: "fonts/fontawesome-webfont.svg", size: 287007, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -489,7 +489,7 @@ func fontsFontawesomeWebfontTtf() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "fonts/fontawesome-webfont.ttf", size: 112160, mode: os.FileMode(436), modTime: time.Unix(1672831921, 0)}
+	info := bindataFileInfo{name: "fonts/fontawesome-webfont.ttf", size: 112160, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -509,7 +509,7 @@ func fontsFontawesomeWebfontWoff() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "fonts/fontawesome-webfont.woff", size: 65452, mode: os.FileMode(436), modTime: time.Unix(1672831921, 0)}
+	info := bindataFileInfo{name: "fonts/fontawesome-webfont.woff", size: 65452, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -529,7 +529,7 @@ func fontsFontawesomeWebfontWoff2() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "fonts/fontawesome-webfont.woff2", size: 77160, mode: os.FileMode(436), modTime: time.Unix(1672831921, 0)}
+	info := bindataFileInfo{name: "fonts/fontawesome-webfont.woff2", size: 77160, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -549,7 +549,7 @@ func jsBootstrapJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "js/bootstrap.js", size: 69707, mode: os.FileMode(436), modTime: time.Unix(1672822852, 0)}
+	info := bindataFileInfo{name: "js/bootstrap.js", size: 69707, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -569,7 +569,7 @@ func jsBootstrapMinJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "js/bootstrap.min.js", size: 37045, mode: os.FileMode(436), modTime: time.Unix(1672822852, 0)}
+	info := bindataFileInfo{name: "js/bootstrap.min.js", size: 37045, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -609,7 +609,7 @@ func jsJquery310MinJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "js/jquery-3.1.0.min.js", size: 86351, mode: os.FileMode(436), modTime: time.Unix(1672822852, 0)}
+	info := bindataFileInfo{name: "js/jquery-3.1.0.min.js", size: 86351, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -629,7 +629,7 @@ func jsJqueryMigrate121MinJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "js/jquery-migrate-1.2.1.min.js", size: 7199, mode: os.FileMode(436), modTime: time.Unix(1672822852, 0)}
+	info := bindataFileInfo{name: "js/jquery-migrate-1.2.1.min.js", size: 7199, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -649,7 +649,7 @@ func jsJqueryAppearJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "js/jquery.appear.js", size: 2416, mode: os.FileMode(436), modTime: time.Unix(1672822852, 0)}
+	info := bindataFileInfo{name: "js/jquery.appear.js", size: 2416, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -669,7 +669,7 @@ func jsJqueryJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "js/jquery.js", size: 267320, mode: os.FileMode(436), modTime: time.Unix(1672822852, 0)}
+	info := bindataFileInfo{name: "js/jquery.js", size: 267320, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -689,7 +689,7 @@ func jsJquerySimplyscrollMinJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "js/jquery.simplyscroll.min.js", size: 7872, mode: os.FileMode(436), modTime: time.Unix(1672822852, 0)}
+	info := bindataFileInfo{name: "js/jquery.simplyscroll.min.js", size: 7872, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -709,7 +709,7 @@ func jsJquerySlimscrollMinJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "js/jquery.slimscroll.min.js", size: 4757, mode: os.FileMode(436), modTime: time.Unix(1672822852, 0)}
+	info := bindataFileInfo{name: "js/jquery.slimscroll.min.js", size: 4757, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -729,7 +729,7 @@ func jsMainJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "js/main.js", size: 1308, mode: os.FileMode(420), modTime: time.Unix(1672969341, 0)}
+	info := bindataFileInfo{name: "js/main.js", size: 1308, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -749,7 +749,7 @@ func jsPrismJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "js/prism.js", size: 582292, mode: os.FileMode(420), modTime: time.Unix(1672969300, 0)}
+	info := bindataFileInfo{name: "js/prism.js", size: 582292, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -769,7 +769,7 @@ func jsTypographyJs() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "js/typography.js", size: 1455, mode: os.FileMode(436), modTime: time.Unix(1672822852, 0)}
+	info := bindataFileInfo{name: "js/typography.js", size: 1455, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
