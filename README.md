@@ -20,8 +20,9 @@ tar zxf markdown-book-V1.0.0-darwin-amd64.tar.gz
 
 ```
 cd markdown-book-linux-amd64
-mkdir md
-echo "### Hello World" > ./md/主页.md
+mkdir md && mkdir md/技术 md/生活
+echo "### Hello World" > .md/技术/主页.md
+echo "### Hello World" > .md/生活/主页.md
 ```
 
 4. 运行
@@ -176,68 +177,6 @@ gitalk:
 
 <img width="390" alt="image" src="https://user-images.githubusercontent.com/10205742/176992908-affe01b6-0a50-488b-bb67-216a75f2a02c.png">
 
-#### 博客导航展示如下图
-
-<img width="407" alt="image" src="https://user-images.githubusercontent.com/10205742/176992913-148a5ba5-bce0-42ed-b09a-9f914556723a.png">
-
-## 部署
-
-> Nginx 反向代理配置文件参考
-
-#### HTTP 协议
-
-```
-server {
-    listen      80;
-    listen [::]:80;
-    server_name yourhost.com;
-
-    location / {
-         proxy_pass  http://127.0.0.1:5006;
-         proxy_set_header   Host             $host;
-         proxy_set_header   X-Real-IP        $remote_addr;
-         proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-     }
-}
-```
-
-#### HTTPS 协议（80 端口自动跳转至 443）
-
-```
-server {
-    listen      80;
-    listen [::]:80;
-    server_name yourhost.com;
-
-    location / {
-        rewrite ^ https://$host$request_uri? permanent;
-    }
-}
-
-server {
-    listen          443 ssl;
-    server_name     yourhost.com;
-    access_log      /var/log/nginx/markdown-book.access.log main;
-
-
-    #证书文件名称
-    ssl_certificate /etc/nginx/certs/yourhost.com_bundle.crt;
-    #私钥文件名称
-    ssl_certificate_key /etc/ngpackinx/certs/yourhost.com.key;
-    ssl_session_timeout 5m;
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
-    ssl_prefer_server_ciphers on;
-
-    location / {
-         proxy_pass  http://127.0.0.1:5006;
-         proxy_set_header   Host             $host;
-         proxy_set_header   X-Real-IP        $remote_addr;
-         proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-     }
- }
-```
-
 ## 开发
 
 1. 安装 `Golang` 开发环境
@@ -332,4 +271,62 @@ docker run -dit --rm --name=markdown-book \
     willgao/markdown-book:latest \
     -t "TechMan'Blog" \
     --analyzer-google "De44AJSLDdda"
+```
+
+## 部署
+
+> Nginx 反向代理配置文件参考
+
+#### HTTP 协议
+
+```
+server {
+    listen      80;
+    listen [::]:80;
+    server_name yourhost.com;
+
+    location / {
+         proxy_pass  http://127.0.0.1:5006;
+         proxy_set_header   Host             $host;
+         proxy_set_header   X-Real-IP        $remote_addr;
+         proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+     }
+}
+```
+
+#### HTTPS 协议（80 端口自动跳转至 443）
+
+```
+server {
+    listen      80;
+    listen [::]:80;
+    server_name yourhost.com;
+
+    location / {
+        rewrite ^ https://$host$request_uri? permanent;
+    }
+}
+
+server {
+    listen          443 ssl;
+    server_name     yourhost.com;
+    access_log      /var/log/nginx/markdown-book.access.log main;
+
+
+    #证书文件名称
+    ssl_certificate /etc/nginx/certs/yourhost.com_bundle.crt;
+    #私钥文件名称
+    ssl_certificate_key /etc/ngpackinx/certs/yourhost.com.key;
+    ssl_session_timeout 5m;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+    ssl_prefer_server_ciphers on;
+
+    location / {
+         proxy_pass  http://127.0.0.1:5006;
+         proxy_set_header   Host             $host;
+         proxy_set_header   X-Real-IP        $remote_addr;
+         proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+     }
+ }
 ```
