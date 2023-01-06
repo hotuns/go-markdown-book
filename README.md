@@ -1,6 +1,7 @@
 [go-md-book](https://github.com/hedongshu/go-md-book)
 
 > 这是一款可以快捷的把 md 文件发布成 gitbook 的程序
+> [img]
 
 ## 支持平台
 
