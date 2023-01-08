@@ -220,6 +220,9 @@ func getActiveNav(ctx iris.Context) string {
 }
 
 func homeHandler(ctx iris.Context) {
+	// 记录耗时
+	defer utils.TimeTrack(time.Now(), "homeHandler")
+
 	activeNav := getActiveNav(ctx)
 
 	List := make([]map[string]interface{}, 0)
@@ -236,6 +239,9 @@ func homeHandler(ctx iris.Context) {
 }
 
 func categoriesHandler(ctx iris.Context) {
+	// 记录耗时
+	defer utils.TimeTrack(time.Now(), "categoriesHandler")
+
 	categorie := ctx.Params().Get("f")
 	showAll := false
 	List := make([]utils.Article, 0)
@@ -263,6 +269,9 @@ func categoriesHandler(ctx iris.Context) {
 }
 
 func articleHandler(ctx iris.Context) {
+	// 记录耗时
+	defer utils.TimeTrack(time.Now(), "articleHandler")
+
 	f := getActiveNav(ctx)
 
 	if utils.IsInSlice(IgnoreFile, f) {
