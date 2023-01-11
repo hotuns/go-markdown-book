@@ -68,12 +68,19 @@ func GetAllMarkDownsFromGithub() {
 
 func getArticlesFromGithub(content *github.RepositoryContent, category string) []types.Article {
 	list := make([]types.Article, 0)
+
 	if content.GetType() == "file" {
+		title := content.GetName()
+		i := strings.LastIndex(title, ".")
+		if i != -1 {
+			title = title[:i]
+		}
+
 		info := types.Article{
-			Title:       content.GetName(),
+			Title:       title,
 			Category:    category,
 			PublishTime: "",
-			Link:        "/" + category + "/" + content.GetName(),
+			Link:        "/" + category + "/" + title,
 		}
 		downUrl := content.GetDownloadURL()
 		resp, err := http.Get(downUrl)
@@ -92,8 +99,8 @@ func getArticlesFromGithub(content *github.RepositoryContent, category string) [
 		if strings.Contains(plist, "[toc]") {
 			plist = strings.ReplaceAll(plist, "[toc]", "")
 		}
-		if len(plist) > 150 {
-			runeList := []rune(plist)
+		runeList := []rune(plist)
+		if len(runeList) > 150 {
 			plist = string(runeList[:150])
 		}
 		info.Preview = plist + "..."
@@ -143,7 +150,7 @@ func Github_ArticleHandler(ctx iris.Context) {
 		Ref: "main",
 	}
 	// 获取markdwon文件
-	fileContent, _, _, err := client.Repositories.GetContents(ctx, GithubStr.Owner, GithubStr.Repo, "/"+f, &opt)
+	fileContent, _, _, err := client.Repositories.GetContents(ctx, GithubStr.Owner, GithubStr.Repo, "/"+f+".md", &opt)
 
 	if err != nil {
 		ctx.StatusCode(500)
