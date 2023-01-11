@@ -107,6 +107,7 @@ func RunWeb(ctx *cli.Context) error {
 			ctx.ViewData("Title2", Title2)
 			ctx.ViewData("Articles", GlobleDatas.Articles)
 			ctx.ViewData("Categories", GlobleDatas.Categories)
+			ctx.ViewData("TreeArticles", GlobleDatas.TreeArticles)
 			ctx.ViewLayout(LayoutFile)
 
 			ctx.Next()
@@ -118,6 +119,21 @@ func RunWeb(ctx *cli.Context) error {
 		app.Get("/categories/{f:path}", iris.Cache(Cache), Github_CategoriesHandler)
 
 	}
+
+	app.Get("/update", func(ctx iris.Context) {
+		if Origin == "file" {
+			ctx.HTML("<h3>当前不是github模式</h3>")
+			return
+		}
+		if Origin == "github" {
+			oldLen := len(GlobleDatas.Articles)
+			GetAllMarkDownsFromGithub()
+			nowLen := len(GlobleDatas.Articles)
+
+			ctx.HTML("<h3>更新完成</h3><p>更新前 %d 篇文章, 更新后 %d 篇文章</p><p><a href= '/' >回到首页</a></p>", oldLen, nowLen)
+			return
+		}
+	})
 
 	app.Run(iris.Addr(":" + strconv.Itoa(parsePort(ctx))))
 

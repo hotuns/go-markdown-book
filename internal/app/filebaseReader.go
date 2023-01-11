@@ -97,12 +97,12 @@ func GetAllMarkDownsFromFile() {
 				Categories = append(Categories, item.Name)
 			}
 
-			thelist := getArticles(item)
-			Articles = append(Articles, thelist...)
+			theList := getArticles(item)
+			Articles = append(Articles, theList...)
 
 			TreeArticles = append(TreeArticles, types.TreeArticle{
 				CategorieName: item.Name,
-				List:          thelist,
+				List:          theList,
 			})
 		}
 	}
