@@ -5,8 +5,9 @@
     {{range .TreeArticles}}
     <li class="listing-item">
       <div class="listing-post">
-        <p class="post-title"><a href="/categories/{{.Name}}" title="技术文档">{{.Name}}</a></p>
-        <span class="date meta-item">{{getChildrenCount .}} 篇</span>
+        <p class="post-title"><a href="/categories/{{.CategorieName}}" title="{{.CategorieName}}">{{.CategorieName}}</a>
+        </p>
+        <span class="date meta-item">{{getArticlesLen .List}} 篇</span>
       </div>
     </li>
     {{end}}
@@ -16,7 +17,7 @@
 <div class="archive animated fadeInDown">
   <p class="post-title">分类 {{.Categorie}}</p>
   <ul class="listing">
-    {{range .List}}
+    {{range .theList}}
     <li class="listing-item">
       <div class="listing-post">
         <p class="post-title"><a href="/article{{.Link}}" title="{{.Title}}">{{.Title}}</a></p>

@@ -13,6 +13,7 @@ import (
 //go:generate go-bindata -fs -o internal/bindata/assets/assets.go -pkg=assets -prefix=web/assets ./web/assets/...
 
 var (
+	origin               = "file"
 	MdDir                = "md/"
 	Title                = "Blog Title"
 	Title2               = "Blog Title2"
@@ -46,6 +47,12 @@ func webCommand() *cli.Command {
 			Value: "",
 			Usage: "Load configuration from `FILE`, default is empty",
 		},
+		altsrc.NewStringFlag(&cli.StringFlag{
+			Name:    "origin",
+			Aliases: []string{"o"},
+			Value:   origin,
+			Usage:   "article origin, file or github",
+		}),
 		altsrc.NewStringFlag(&cli.StringFlag{
 			Name:    "dir",
 			Aliases: []string{"d"},
@@ -90,6 +97,18 @@ func webCommand() *cli.Command {
 		}),
 	}
 
+	githubFlags := []cli.Flag{
+		altsrc.NewStringFlag(&cli.StringFlag{
+			Name:  "github.owner",
+			Usage: "set up github owner",
+		}),
+		altsrc.NewStringFlag(&cli.StringFlag{
+			Name:  "github.repo",
+			Usage: "set up github Repo",
+		}),
+	}
+	flags := append(commonFlags, githubFlags...)
+
 	gitalkFlags := []cli.Flag{
 		altsrc.NewStringFlag(&cli.StringFlag{
 			Name:  "gitalk.client-id",
@@ -116,8 +135,7 @@ func webCommand() *cli.Command {
 			Usage: "Set up Gitalk Admin, default is `[\"gitalk\"]`",
 		}),
 	}
-
-	flags := append(commonFlags, gitalkFlags...)
+	flags = append(flags, gitalkFlags...)
 
 	analyzerFlags := []cli.Flag{
 		altsrc.NewStringFlag(&cli.StringFlag{
@@ -133,7 +151,6 @@ func webCommand() *cli.Command {
 			Usage:   "Set up Google Analyzer, default is empty",
 		}),
 	}
-
 	flags = append(flags, analyzerFlags...)
 
 	ignoreFlags := []cli.Flag{
@@ -146,7 +163,6 @@ func webCommand() *cli.Command {
 			Usage: "Set up ignore path, eg: demo",
 		}),
 	}
-
 	flags = append(flags, ignoreFlags...)
 
 	web := cli.Command{

@@ -75,8 +75,8 @@
                 <a class="  js-theme-action theme-action" href="javascript:;"><i class="fa fa-sun-o"></i></a>
               </span>
             </li>
-            <li><a href="/">首页</a></li>
-            <li><a href="/categories">分类</a></li>
+            <li><a class="{{isHomeNavActive .CurrentPath " /" }}" href="/">首页</a></li>
+            <li><a class="{{isHomeNavActive .CurrentPath " /categories" }}" href="/categories">分类</a></li>
             <!-- {{ range .Categories }}
             <li><a href="">{{ . }}</a></li>
             {{end}} -->
