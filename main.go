@@ -83,12 +83,6 @@ func webCommand() *cli.Command {
 			Value:   "prod",
 			Usage:   "Runtime environment, dev|test|prod",
 		}),
-		altsrc.NewStringFlag(&cli.StringFlag{
-			Name:    "index",
-			Aliases: []string{"i"},
-			Value:   "",
-			Usage:   "Home page, default is empty",
-		}),
 		altsrc.NewIntFlag(&cli.IntFlag{
 			Name:    "cache",
 			Aliases: []string{"c"},

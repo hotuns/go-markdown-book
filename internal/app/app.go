@@ -24,7 +24,6 @@ var (
 	Env        string
 	Title      string
 	Title2     string
-	Index      string
 	LayoutFile = "layouts/layout.html"
 	LogsDir    = "cache/logs/"
 	TocPrefix  = "[toc]"
@@ -158,7 +157,6 @@ func initParams(ctx *cli.Context) {
 	Env = ctx.String("env")
 	Title = ctx.String("title")
 	Title2 = ctx.String("title2")
-	Index = ctx.String("index")
 
 	Cache = time.Minute * 0
 	if Env == "prod" {

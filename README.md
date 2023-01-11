@@ -1,8 +1,7 @@
 [go-md-book](https://github.com/hedongshu/go-md-book)
 
 > 这是一款可以快捷的把 md 文件发布成 web 页面 的程序
-> ![light](https://github.com/hedongshu/go-markdown-book/blob/main/light.jpg?raw=true)
-> ![dark](https://github.com/hedongshu/go-markdown-book/blob/main/dark.jpg?raw=true)
+> ![light](https://github.com/hedongshu/go-markdown-book/blob/main/light.jpg?raw=true) > ![dark](https://github.com/hedongshu/go-markdown-book/blob/main/dark.jpg?raw=true)
 
 ## 支持平台
 
@@ -51,13 +50,16 @@ echo "### Hello World" > .md/生活/主页.md
   - -h 查看版本
   - web 运行博客服务
 - markdown-book web
-  - --config FILE 加载配置文件, 默认为空
+  - --config FILE 加载配置文件,
+  - --origin value, -o value 指定数据源，可选：github,file，默认:file
   - --dir value, -d value 指定 markdown 文件夹，默认：./md/
-  - --title value, -t value web 服务标题，默认："Blog"
+  - --title value, -t value web 服务标题，默认："Blog Title"
+  - --title2 value, -t2 value web 副标题，默认："Blog Title2"
   - --port value, -p value web 服务端口，默认：5006
   - --env value, -e value 运行环境, 可选：dev,test,prod，默认："prod"
-  - --index value, -i value 设置默认首页的文件名称, 默认为空
   - --cache value, -c value 设置页面缓存时间，单位分钟，默认 3 分钟
+  - --github.owner 设置 GitHub 数据源的用户名
+  - --github.repo 设置 GitHub 数据源的仓库名
   - --analyzer-baidu value 设置百度分析统计器
   - --analyzer-google value 设置谷歌分析统计器
   - --gitalk.client-id value 设置 Gitalk ClientId, 默认为空
@@ -86,18 +88,33 @@ echo "### Hello World" > .md/生活/主页.md
 ./markdown-book web --config ./config/config.yml
 ```
 
-- Docker
+### 设置数据源
+
+> 支持使用 github 或者本地的文件夹作为文章的数据源，设置 origin 为 `github` or file`
+
+#### 使用 GitHub 为数据源
+
+```yaml
+origin: github
+github:
+  owner: "github 用户名"
+  repo: "github 仓库名"
+```
+
+假如你有一个 github 的仓库，里面存了你的 markdown 文档，你只需要把用户名和仓库名填到配置文件里。
+使用配置启动之后，会自动读取一次你的 github 仓库，把所有的文档加载到 go 里，后续如果你有 md 文件的改动，只需要访问一次
+
+> http://127.0.0.1:5006/update
+> 就可以完成数据的更新
+
+<!-- - Docker
 
 ```
 docker run -dit --rm --name=markdown-book \
 -p 5006:5006 \
 -v $(pwd)/md:/md -v $(pwd)/cache:/cache -v $(pwd)/config:/config \
 willgao/markdown-book:latest --config ./config/config.yml
-```
-
-### 默认首页
-
-> 如果启动时未指定 `index`，程序默认以导航中的第一个文件作为首页
+``` -->
 
 ### 评论插件
 
@@ -171,13 +188,9 @@ gitalk:
 
 > 默认读取与程序运行同一级目录的 **favicon.ico** 文件
 
-### 导航排序
+<!-- ### 导航排序
 
-> 博客导航默认按照 `字典` 排序，可以通过 `@` 前面的数字来自定义顺序
-
-#### 个人博客目录如下图
-
-<img width="390" alt="image" src="https://user-images.githubusercontent.com/10205742/176992908-affe01b6-0a50-488b-bb67-216a75f2a02c.png">
+> 博客导航默认按照 `字典` 排序，可以通过 `@` 前面的数字来自定义顺序 -->
 
 ## 开发
 
@@ -217,7 +230,7 @@ gitalk:
    make package-all
    ```
 
-   ### Docker
+<!-- ### Docker
 
 7. 下载
 
@@ -273,7 +286,7 @@ docker run -dit --rm --name=markdown-book \
     willgao/markdown-book:latest \
     -t "TechMan'Blog" \
     --analyzer-google "De44AJSLDdda"
-```
+``` -->
 
 ## 部署
 

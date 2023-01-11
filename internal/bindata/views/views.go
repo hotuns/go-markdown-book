@@ -171,7 +171,7 @@ func AssetFile() http.FileSystem {
 	return &assetOperator{}
 }
 
-var _articleHtml = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\xb2\x49\xc9\x2c\x53\x48\xce\x49\x2c\x2e\xb6\x55\x2a\xc8\x2f\x2e\xd1\x2d\x48\x4c\x4f\x55\xb2\xe3\x52\x50\xa8\xae\xd6\x73\x2c\x2a\xc9\x4c\xce\x49\xad\xad\xe5\xb2\xd1\x4f\xc9\x2c\xb3\xe3\x02\x04\x00\x00\xff\xff\x77\x93\x46\x1f\x2e\x00\x00\x00")
+var _articleHtml = []byte("\x1f\x8b\x08\x00\x00\x00\x00\x00\x00\xff\xb2\x49\xc9\x2c\x53\x48\xce\x49\x2c\x2e\xb6\x55\x2a\xc8\x2f\x2e\xd1\x2d\x48\x4c\x4f\x55\xb2\xe3\x52\x50\xa8\xae\xd6\x73\x2c\x2a\xc9\x4c\xce\x49\xad\xad\xe5\xb2\xd1\x4f\xc9\x2c\xb3\xe3\xe2\x02\x2b\xcf\x4c\xb1\x55\x4a\xcf\x2c\x49\xcc\xc9\x56\xb2\x83\x4a\x00\x02\x00\x00\xff\xff\x68\x41\x05\xf7\x47\x00\x00\x00")
 
 func articleHtmlBytes() ([]byte, error) {
 	return bindataRead(
@@ -186,7 +186,7 @@ func articleHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "article.html", size: 46, mode: os.FileMode(420), modTime: time.Unix(1672975908, 0)}
+	info := bindataFileInfo{name: "article.html", size: 71, mode: os.FileMode(420), modTime: time.Unix(1673419221, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -206,7 +206,7 @@ func categoriesHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "categories.html", size: 932, mode: os.FileMode(420), modTime: time.Unix(1673403381, 0)}
+	info := bindataFileInfo{name: "categories.html", size: 932, mode: os.FileMode(420), modTime: time.Unix(1673409500, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -266,7 +266,7 @@ func homeHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "home.html", size: 425, mode: os.FileMode(420), modTime: time.Unix(1673402824, 0)}
+	info := bindataFileInfo{name: "home.html", size: 425, mode: os.FileMode(420), modTime: time.Unix(1673409500, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -286,7 +286,7 @@ func layoutsLayoutHtml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "layouts/layout.html", size: 6093, mode: os.FileMode(420), modTime: time.Unix(1673253972, 0)}
+	info := bindataFileInfo{name: "layouts/layout.html", size: 6093, mode: os.FileMode(420), modTime: time.Unix(1673409500, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
