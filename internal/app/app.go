@@ -24,12 +24,12 @@ var (
 	Env        string
 	Title      string
 	Title2     string
-	LayoutFile = "layouts/layout.html"
-	LogsDir    = "cache/logs/"
-	TocPrefix  = "[toc]"
-	IgnoreFile = []string{`favicon.ico`, `.DS_Store`, `.gitignore`, `README.md`}
-	IgnorePath = []string{`.git`}
-	Cache      time.Duration
+	LayoutFile               = "layouts/layout.html"
+	LogsDir                  = "cache/logs/"
+	TocPrefix                = "[toc]"
+	IgnoreFile               = []string{`favicon.ico`, `.DS_Store`, `.gitignore`, `README.md`}
+	IgnorePath               = []string{`.git`}
+	Cache      time.Duration = 3
 	Analyzer   types.Analyzer
 	Gitalk     types.Gitalk
 	GithubStr  types.GithubStr
@@ -158,9 +158,11 @@ func initParams(ctx *cli.Context) {
 	Title = ctx.String("title")
 	Title2 = ctx.String("title2")
 
-	Cache = time.Minute * 0
-	if Env == "prod" {
-		Cache = time.Minute * 3
+	_cache := ctx.Int("cache")
+
+	Cache = time.Minute * time.Duration(_cache)
+	if Env == "dev" {
+		Cache = time.Minute * 0
 	}
 
 	// 设置分析器
