@@ -1,6 +1,6 @@
 FROM --platform=$TARGETPLATFORM scratch as runner
 
-MAINTAINER willgao <will-gao@hotmail.com>
+LABEL maintainer="hedongshu <hedongshu@foxmail.com>"
 
 ARG TARGETOS
 ARG TARGETARCH

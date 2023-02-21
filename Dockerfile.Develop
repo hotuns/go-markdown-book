@@ -1,7 +1,5 @@
 FROM scratch as runner
-
-MAINTAINER willgao <will-gao@hotmail.com>
-
+LABEL maintainer="hedongshu <hedongshu@foxmail.com>"
 COPY ./build/markdown-book-linux-amd64/markdown-book /data/app/
 
 EXPOSE 5006

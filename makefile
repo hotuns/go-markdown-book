@@ -5,11 +5,11 @@ build: bindata markdown-book
 
 .PHONY: docker-push
 docker-push: package-all
-	docker buildx build --platform linux/arm64,linux/amd64 -t willgao/markdown-book:latest . --push
+	docker buildx build --platform linux/arm64,linux/amd64 -t hedongshu/markdown-book:latest . --push
 
 .PHONY: docker-build
 docker-build: package-all
-	docker build -t willgao/markdown-book:dev -f ./Dockerfile.Develop .
+	docker build -t hedongshu/markdown-book:dev -f ./Dockerfile.Develop .
 
 .PHONY: bindata
 bindata:

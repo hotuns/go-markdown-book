@@ -107,14 +107,14 @@ github:
 > http://127.0.0.1:5006/update
 > 就可以完成数据的更新
 
-<!-- - Docker
+- Docker
 
 ```
 docker run -dit --rm --name=markdown-book \
 -p 5006:5006 \
 -v $(pwd)/md:/md -v $(pwd)/cache:/cache -v $(pwd)/config:/config \
-willgao/markdown-book:latest --config ./config/config.yml
-``` -->
+hedongshu/markdown-book:latest --config ./config/config.yml
+```
 
 ### 评论插件
 
@@ -230,12 +230,12 @@ gitalk:
    make package-all
    ```
 
-<!-- ### Docker
+### Docker
 
 7. 下载
 
 ```
-docker pull willgao/markdown-book:latest
+docker pull hedongshu/markdown-book:latest
 ```
 
 2. 启动
@@ -246,7 +246,7 @@ docker pull willgao/markdown-book:latest
    docker run -dit --rm --name=markdown-book \
    -p 5006:5006 \
    -v $(pwd)/md:/md -v $(pwd)/cache:/cache \
-   willgao/markdown-book:latest
+   hedongshu/markdown-book:latest
    ```
 
    - 开发环境
@@ -255,7 +255,7 @@ docker pull willgao/markdown-book:latest
    docker run -dit --rm --name=markdown-book \
    -p 5006:5006 \
    -v $(pwd)/md:/md -v $(pwd)/cache:/cache \
-   willgao/markdown-book:latest \
+   hedongshu/markdown-book:latest \
    -e dev
    ```
 
@@ -268,14 +268,14 @@ docker pull willgao/markdown-book:latest
 docker run -dit --rm --name=markdown-book \
     -p 5006:5006 \
     -v $(pwd)/md:/md -v $(pwd)/cache:/cache \
-    willgao/markdown-book:latest -h
+    hedongshu/markdown-book:latest -h
 
 
 # 设置 title
 docker run -dit --rm --name=markdown-book \
     -p 5006:5006 \
     -v $(pwd)/md:/md -v $(pwd)/cache:/cache \
-    willgao/markdown-book:latest \
+    hedongshu/markdown-book:latest \
     -t "TechMan'Blog"
 
 
@@ -283,10 +283,10 @@ docker run -dit --rm --name=markdown-book \
 docker run -dit --rm --name=markdown-book \
     -p 5006:5006 \
     -v $(pwd)/md:/md -v $(pwd)/cache:/cache \
-    willgao/markdown-book:latest \
+    hedongshu/markdown-book:latest \
     -t "TechMan'Blog" \
     --analyzer-google "De44AJSLDdda"
-``` -->
+```
 
 ## 部署
 
